@@ -1,0 +1,22 @@
+version: "2"
+services:
+  db:
+    image: mysql:8.0
+    container_name: triple-db
+    environment:
+      MYSQL_DATABASE: triple
+      MYSQL_USER: triple
+      MYSQL_PASSWORD: triple
+      MYSQL_ROOT_PASSWORD: root
+  app:
+    build: .
+    container_name: mileage-service
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+      - .env:/app/.env
+  
+
